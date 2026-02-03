@@ -1,5 +1,9 @@
-export default function CartSummary({ getCartAmount , delivery_fee}) {
-  const total = getCartAmount()+delivery_fee;
+import { useContext } from "react";
+import { ShopContext } from "../../context/ShopContext";
+
+export default function CartSummary() {
+  const {navigate, getCartAmount, delivery_fee} = useContext(ShopContext);
+  
 
   return (
     <div className="w-full md:w-96 ml-auto mt-12">
@@ -24,7 +28,7 @@ export default function CartSummary({ getCartAmount , delivery_fee}) {
         </div>
       </div>
 
-      <button className="w-full mt-6 bg-black text-white py-3 hover:bg-gray-800 transition">
+      <button onClick={()=> navigate('/place-order')} className="w-full mt-6 bg-black text-white py-3 hover:bg-gray-800 transition cursor-pointer">
         PROCEED TO CHECKOUT
       </button>
     </div>

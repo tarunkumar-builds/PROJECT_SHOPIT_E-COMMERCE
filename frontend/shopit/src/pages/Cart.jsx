@@ -4,7 +4,7 @@ import CartSummary from "../components/Cart/CartSummary";
 import { ShopContext } from "../context/ShopContext";
 
 export default function Cart() {
-  const { cartItems, products, updateQuantity, getCartAmount, delivery_fee } = useContext(ShopContext);
+  const { cartItems, products, updateQuantity } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
 
@@ -42,7 +42,7 @@ export default function Cart() {
 
       })}
 
-      <CartSummary getCartAmount={getCartAmount} delivery_fee={delivery_fee} />
+      <CartSummary />
     </div>
   );
 }

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { assets } from "../../assets/assets";
+import { ShopContext } from "../../context/ShopContext";
 
 export default function PaymentMethod({ onPlaceOrder }) {
-  const [method, setMethod] = useState("cod");
-
+  const {navigate} = useContext(ShopContext);
+  const [method,  setMethod] = useState("cod");
   const optionStyle =
     "flex items-center gap-2 border px-4 py-3 cursor-pointer hover:border-black";
 
@@ -20,7 +22,7 @@ export default function PaymentMethod({ onPlaceOrder }) {
             checked={method === "stripe"}
             onChange={() => setMethod("stripe")}
           />
-          Stripe
+          <img src={assets.stripe_logo} alt="stripe" />
         </label>
 
         <label className={optionStyle}>
@@ -30,7 +32,7 @@ export default function PaymentMethod({ onPlaceOrder }) {
             checked={method === "razorpay"}
             onChange={() => setMethod("razorpay")}
           />
-          Razorpay
+          <img src={assets.razorpay_logo} alt="razor pay" />
         </label>
 
         <label className={optionStyle}>
@@ -45,7 +47,7 @@ export default function PaymentMethod({ onPlaceOrder }) {
       </div>
 
       <button
-        onClick={() => onPlaceOrder(method)}
+        onClick={() => navigate('/orders')}
         className="w-full mt-6 bg-black text-white py-3 hover:bg-gray-800"
       >
         PLACE ORDER
