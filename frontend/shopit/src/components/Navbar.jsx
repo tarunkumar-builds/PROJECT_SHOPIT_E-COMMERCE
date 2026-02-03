@@ -5,7 +5,7 @@ import { ShopContext } from "../context/ShopContext";
 
 export function Navbar() {
     const [visible, setVisible] = useState(false);
-    const {showSearch,setShowSearch, getCartCount} = useContext(ShopContext);
+    const { showSearch, setShowSearch, getCartCount } = useContext(ShopContext);
     return (
         <nav className="flex items-center justify-between px-10 py-5 border-b">
             <h1 className="text-2xl font-semibold tracking-wide">
@@ -45,7 +45,7 @@ export function Navbar() {
                 {/* Search */}
                 <div>
                     <img
-                        onClick={()=> setShowSearch(!showSearch)}
+                        onClick={() => setShowSearch(!showSearch)}
                         src={assets.search_icon}
                         className="w-5 h-5 cursor-pointer hover:scale-110 transition duration-200"
                         alt="search"
@@ -54,11 +54,13 @@ export function Navbar() {
 
                 {/* Profile with Dropdown */}
                 <div className="relative group">
-                    <img
-                        src={assets.profile_icon}
-                        className="w-5 h-5 cursor-pointer hover:scale-110 transition duration-200"
-                        alt="profile"
-                    />
+                    <Link to='/login'>
+                        <img
+                            src={assets.profile_icon}
+                            className="w-5 h-5 cursor-pointer hover:scale-110 transition duration-200"
+                            alt="profile"
+                        />
+                    </Link>
 
                     {/* Dropdown */}
                     <div className="absolute right-0 top-6 w-36 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
