@@ -1,13 +1,13 @@
-import { Navbar } from "../components/Navbar";
 import { Hero } from "../components/Hero";
 import { SectionTitle } from "../components/SectionTitle";
 import { ProductGrid } from "../components/ProductGrid";
 import { Features } from "../components/Features";
 import { Subscribe } from "../components/Subscribe";
-import { Footer } from "../components/Footer";
-import {products} from "../assets/assets";
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 export function Home() {
+    const {products} = useContext(ShopContext);
     const bestsellers = products.filter(product => product.bestseller);
     return (
         <>

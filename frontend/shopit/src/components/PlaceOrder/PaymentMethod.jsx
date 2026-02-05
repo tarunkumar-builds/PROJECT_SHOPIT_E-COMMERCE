@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
-import { assets } from "../../assets/assets";
 import { ShopContext } from "../../context/ShopContext";
 
 export default function PaymentMethod({ onPlaceOrder }) {
-  const {navigate} = useContext(ShopContext);
+  const {navigate, assets} = useContext(ShopContext);
   const [method,  setMethod] = useState("cod");
   const optionStyle =
     "flex items-center gap-2 border px-4 py-3 cursor-pointer hover:border-black";

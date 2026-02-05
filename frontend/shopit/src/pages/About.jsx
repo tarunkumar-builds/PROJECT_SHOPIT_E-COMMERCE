@@ -1,6 +1,4 @@
 import AboutIntro from "../components/AboutIntro";
-import { Footer } from "../components/Footer";
-import { Navbar } from "../components/Navbar";
 import { SectionTitle } from "../components/SectionTitle";
 import { Subscribe } from "../components/Subscribe";
 import WhyChooseUs from "../components/WhyChooseUs";

@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { products } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 import { RelatedProducts } from "./RelatedProducts";
 import { SectionTitle } from "./SectionTitle";
 
 export default function ProductDetails({ productId }) {
-  const { currency, addToCart } = useContext(ShopContext);
+  const { currency, addToCart, products } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [mainImage, setMainImage] = useState('');
   const [sizes, setSizes] = useState([]);

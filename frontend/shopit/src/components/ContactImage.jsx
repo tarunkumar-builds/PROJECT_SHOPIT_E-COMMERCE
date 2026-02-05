@@ -1,10 +1,12 @@
-import contact_img from "../assets/contact_img.png";
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 
 const ContactImage = () => {
+  const {assets} = useContext(ShopContext);
   return (
     <img
-      src={contact_img}
+      src={assets.contact_img}
       alt="Contact Forever"
       className="w-300 h-125 object-contain"
     />

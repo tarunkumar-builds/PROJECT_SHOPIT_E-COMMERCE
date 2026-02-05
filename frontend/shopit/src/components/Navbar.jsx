@@ -1,11 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
-import { assets } from "../assets/assets";
 import { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 
 export function Navbar() {
     const [visible, setVisible] = useState(false);
-    const { showSearch, setShowSearch, getCartCount } = useContext(ShopContext);
+    const { showSearch, setShowSearch, getCartCount, assets } = useContext(ShopContext);
     return (
         <nav className="flex items-center justify-between px-10 py-5 border-b">
             <h1 className="text-2xl font-semibold tracking-wide">
@@ -101,7 +100,7 @@ export function Navbar() {
                     </p>
                 </Link>
 
-                <img onClick={() => setVisible(true)} src={assets.menu_icon} className="w-5 cursor-pointer sm:hidden" alt="" />
+                <img onClick={() => setVisible(true)} src={assets.menu_icon} className="w-5 cursor-pointer md:hidden" alt="" />
 
             </div>
 

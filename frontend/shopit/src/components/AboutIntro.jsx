@@ -1,11 +1,14 @@
-import about_img from "../assets/about_img.png";
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
+
 
 const AboutIntro = () => {
+  const {assets} = useContext(ShopContext);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
       {/* Image */}
       <img
-        src={about_img}
+        src={assets.about_img}
         alt="About Forever"
         className="w-500 h-125 object-contain"
       />

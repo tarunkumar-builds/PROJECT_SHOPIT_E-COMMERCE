@@ -1,13 +1,10 @@
-import { Footer } from "../components/Footer";
-import { Navbar } from "../components/Navbar";
 import { ProductGrid } from "../components/ProductGrid";
-import { assets, products } from "../assets/assets";
 import FilterSection from "../components/FilterSection";
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 
 export function Collection() {
-  const {search, showSearch } = useContext(ShopContext);
+  const {search, showSearch,products, assets } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);

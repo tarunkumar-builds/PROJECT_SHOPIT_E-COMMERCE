@@ -1,6 +1,9 @@
-import hero_img from "../assets/hero_img.png";
+import { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 export function Hero() {
+    const {assets} = useContext(ShopContext);
+    const hero_img = assets.hero_img;
     return (
         <section
             className="grid grid-cols-1 md:grid-cols-2 items-center
