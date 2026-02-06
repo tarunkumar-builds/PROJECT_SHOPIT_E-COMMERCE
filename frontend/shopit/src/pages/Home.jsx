@@ -5,10 +5,17 @@ import { Features } from "../components/Features";
 import { Subscribe } from "../components/Subscribe";
 import { useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
+import { useState } from "react";
+import { use } from "react";
+import { useEffect } from "react";
 
 export function Home() {
     const {products} = useContext(ShopContext);
-    const bestsellers = products.filter(product => product.bestseller);
+    const [bestsellers, setBestseller] = useState([]);
+    useEffect(()=>{
+        const bestProduct =  products.filter(product => product.bestseller);
+        setBestseller(bestProduct);
+    },[products])
     return (
         <>
             <Hero />
