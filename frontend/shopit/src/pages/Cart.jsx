@@ -9,20 +9,22 @@ export default function Cart() {
 
 
   useEffect(() => {
-    const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          })
+    if (products.length > 0) {
+      const tempData = [];
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            })
+          }
         }
       }
+      setCartData(tempData);
     }
-    setCartData(tempData);
-  }, [cartItems])
+  }, [cartItems, products])
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -35,7 +37,7 @@ export default function Cart() {
             key={index}
             item={productData}
             size={item.size}
-            quantity = {item.quantity}
+            quantity={item.quantity}
             updateQuantity={updateQuantity}
           />
         )

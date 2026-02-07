@@ -31,10 +31,6 @@ export const ShopContextProvider = ({ children }) => {
     }
   }
 
-  useEffect(()=>{
-    getProductsData();
-  },[]);
-
   const addToCart = async (itemId, size) => {
     if(!size){
       toast.error('Select Product Size');
@@ -54,6 +50,15 @@ export const ShopContextProvider = ({ children }) => {
     }
 
     setCartItems(cartData);
+
+    if(token){
+      try {
+        await axios.post(backendUrl + "/api/cart/add", {itemId,size}, {headers:{token}});
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
   }
 
   const getCartCount = () =>{
@@ -78,12 +83,23 @@ export const ShopContextProvider = ({ children }) => {
     
   },[cartItems])
 
-  const updateQuantity = (itemId, size, quantity) =>{
+  const updateQuantity = async (itemId, size, quantity) =>{
     let cartData = structuredClone(cartItems);
 
     cartData[itemId][size] = quantity;
-
-    setCartItems(cartData);
+    if(token){
+      try {
+        const response = await axios.post(backendUrl + "/api/cart/update", {itemId,size,quantity}, {headers:{token}});
+        if(response.data.success){
+          setCartItems(cartData);
+        }else{
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
   }
 
   const getCartAmount = ()=>{
@@ -104,6 +120,26 @@ export const ShopContextProvider = ({ children }) => {
     return totalAmount;
   }
 
+  const getUserCart = async (token)=>{
+      try {
+        const response = await axios.post(backendUrl + "/api/cart/get", {}, {headers:{token}});
+        if(response.data.success){
+          setCartItems(response.data.cartData);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+  }
+
+  useEffect(()=>{
+    getProductsData();
+    if(!token && localStorage.getItem("token")){
+      setToken(localStorage.getItem("token"));
+      getUserCart(localStorage.getItem("token"));
+    }
+  },[])
+
   const value = {
     products,
     currency,
@@ -123,6 +159,7 @@ export const ShopContextProvider = ({ children }) => {
     backendUrl,
     token,
     setToken,
+    getUserCart,
   };
 
   return (

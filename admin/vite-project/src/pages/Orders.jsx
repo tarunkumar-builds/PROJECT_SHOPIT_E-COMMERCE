@@ -1,61 +1,93 @@
+import { useEffect } from "react";
+import { useState } from "react";
+import { backendUrl } from "../App";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { assets } from "../assets/assets";
 
 
-export default function Orders({token}) {
-  const orders = [1, 2, 3]; // dummy data
+export default function Orders({ token }) {
+  const [orders, setOrders] = useState([])
+
+  const fetchAllOrders = async () => {
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const response = await axios.post(backendUrl + '/api/order/list', {}, { headers: { token } });
+      if (response.data.success) {
+        setOrders(response.data.orders.reverse())
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
+  const statusHandler = async (event, orderId)=>{
+    try {
+      const response = await axios.post(backendUrl + '/api/order/status', {orderId, status: event.target.value}, {headers:{token}})
+      if (response.data.success) {
+        await fetchAllOrders();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllOrders();
+  }, [token])
 
   return (
     <>
-          <h2 className="text-2xl font-semibold mb-6">Order Page</h2>
+      <h2 className="text-2xl font-semibold mb-6">Order Page</h2>
 
-          <div className="space-y-6">
-            {orders.map((order, i) => (
-              <div
-                key={i}
-                className="bg-white border rounded-lg p-6 flex justify-between items-start shadow-sm"
-              >
-                {/* LEFT */}
-                <div className="flex gap-5">
-                  <img
-                    src="https://via.placeholder.com/60"
-                    alt=""
-                    className="w-14 h-14 object-cover"
-                  />
-
-                  <div className="text-sm space-y-2">
-                    <p className="font-medium">
-                      Men Round Neck Pure Cotton T-shirt x 2 M
-                    </p>
-
-                    <div className="text-gray-500">
-                      <p className="font-medium text-gray-700">Ayinash kr</p>
-                      <p>Some street</p>
-                      <p>Bangalore, KA, 560001</p>
-                      <p>1234567890</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* MIDDLE */}
-                <div className="text-sm space-y-1 text-gray-600">
-                  <p>Items : 3</p>
-                  <p>Method : COD</p>
-                  <p>Payment : Pending</p>
-                  <p>Date : 8/16/2024</p>
-                </div>
-
-                {/* RIGHT */}
-                <div className="flex items-center gap-6">
-                  <p className="font-semibold text-lg">$304</p>
-
-                  <select className="border px-3 py-2 rounded-md text-sm">
-                    <option>Order Placed</option>
-                    <option>Shipped</option>
-                    <option>Delivered</option>
-                  </select>
-                </div>
+      <div className="space-y-6">
+        {orders.map((order, i) => (
+          <div
+            key={i}
+            className="bg-white border rounded-lg p-6 flex justify-between items-start shadow-sm"
+          >
+            <div>
+              <img src={assets.parcel_icon} alt="" />
+              <div>
+                {order.items.map((item, index) => {
+                  if (index === order.items.length - 1) {
+                    return <p className="py-0.5" key={index}>{item.name} x {item.quantity} <span>{item.size}</span></p>
+                  } else {
+                    return <p className="py-0.5" key={index}>{item.name} x {item.quantity} <span>{item.size}</span>,</p>
+                  }
+                })
+                }
               </div>
-            ))}
+              <p className="mt-3 mb-2 font-medium">{order.address.firstName + " " + order.address.lastName}</p>
+              <div>
+                <p>{order.address.street + ", "}</p>
+                <p>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}</p>
+              </div>
+              <p>{order.address.phone}</p>
+            </div>
+            <div>
+              <p className="text-sm sm:text-[15px]">Items : {order.items.length}</p>
+              <p className="mt-3">Method : {order.paymentMethod}</p>
+              <p>Payment : {order.payment ? 'Done' : 'Pending'}</p>
+              <p>Date : {new Date(order.date).toLocaleDateString()}</p>
+            </div>
+            <p className="text-sm sm:text-[15px]">${order.amount}</p>
+            <select onChange={(event)=> statusHandler(event,order._id)} value={order.status} className="p-2 font-semibold">
+             <option value="Order Placed">Order Placed</option>
+             <option value="Packing">Packing</option>
+             <option value="Shipped">Shipped</option>
+             <option value="Out for delivery">Out for delivery</option>
+             <option value="Delivered">Delivered</option>
+            </select>
           </div>
-        </>
+        ))}
+      </div>
+    </>
   );
 }

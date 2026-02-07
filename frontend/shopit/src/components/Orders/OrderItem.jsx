@@ -4,7 +4,7 @@ export default function OrderItem({ order }) {
       {/* LEFT */}
       <div className="flex gap-4 items-center">
         <img
-          src={order.image}
+          src={order.image[0]}
           alt={order.name}
           className="w-20 h-24 object-cover"
         />
@@ -21,7 +21,7 @@ export default function OrderItem({ order }) {
           </p>
 
           <p className="text-sm text-gray-500">
-            Payment: {order.payment}
+            Payment: {order.paymentMethod}
           </p>
         </div>
       </div>

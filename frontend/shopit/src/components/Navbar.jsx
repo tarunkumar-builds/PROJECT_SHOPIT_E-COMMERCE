@@ -4,12 +4,21 @@ import { ShopContext } from "../context/ShopContext";
 
 export function Navbar() {
     const [visible, setVisible] = useState(false);
-    const { showSearch, setShowSearch, getCartCount, assets } = useContext(ShopContext);
+    const { showSearch, setShowSearch, getCartCount, assets, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        setToken('');
+        setCartItems({});
+        navigate('/login');
+    }
     return (
         <nav className="flex items-center justify-between px-10 py-5 border-b">
-            <h1 className="text-2xl font-semibold tracking-wide">
-                FOREVER<span className="text-pink-500">.</span>
+            <NavLink to="/">
+                <h1 className="text-2xl font-semibold tracking-wide">
+                SHOPit<span className="text-pink-500">.</span>
             </h1>
+            </NavLink>
 
             <ul className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
                 <li className="cursor-pointer hover:text-black">
@@ -53,8 +62,9 @@ export function Navbar() {
 
                 {/* Profile with Dropdown */}
                 <div className="relative group">
-                    <Link to='/login'>
+                    <Link>
                         <img
+                            onClick={()=> navigate('/login')}
                             src={assets.profile_icon}
                             className="w-5 h-5 cursor-pointer hover:scale-110 transition duration-200"
                             alt="profile"
@@ -62,7 +72,7 @@ export function Navbar() {
                     </Link>
 
                     {/* Dropdown */}
-                    <div className="absolute right-0 top-6 w-36 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    {token && <div className="absolute right-0 top-6 w-36 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
 
                         <NavLink
                             to="/profile"
@@ -79,12 +89,12 @@ export function Navbar() {
                         </NavLink>
 
                         <button
-                            onClick={() => console.log("logout")}
+                            onClick={logout}
                             className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-black"
                         >
                             Logout
                         </button>
-                    </div>
+                    </div>}
                 </div>
 
                 {/* Cart */}

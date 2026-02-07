@@ -1,32 +1,44 @@
+import { useContext } from "react";
 import OrderItem from "../components/Orders/OrderItem";
+import { ShopContext } from "../context/ShopContext";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 
 export default function Orders() {
   // dummy data for now
-  const orders = [
-    {
-      id: 1,
-      image: "/products/p1.png",
-      name: "Men Round Neck Pure Cotton T-shirt",
-      price: 54,
-      quantity: 1,
-      size: "XL",
-      date: "Fri Aug 16 2024",
-      payment: "COD",
-      status: "Order Placed",
-    },
-    {
-      id: 2,
-      image: "/products/p2.png",
-      name: "Men Round Neck Pure Cotton T-shirt",
-      price: 80,
-      quantity: 1,
-      size: "S",
-      date: "Fri Aug 16 2024",
-      payment: "COD",
-      status: "Order Placed",
-    },
-  ];
+  const {backendUrl , token, currency} = useContext(ShopContext);
+  const [orderData, setOrderData] = useState([]);
+
+  const loadOrderData = async ()=> {
+    try {
+      if(!token){
+        return null
+      }
+      console.log("token available")
+      const response = await axios.post(backendUrl + '/api/order/userorders',{},{headers:{token}})
+      if(response.data.success){
+        let allOrdersItem = []
+        response.data.orders.map((order)=>{
+          order.items.map((item)=>{
+            item['status'] = order.status
+            item['payment'] = order.payment
+            item['paymentMethod'] = order.paymentMethod
+            item['date']=order.date 
+            allOrdersItem.push(item)
+          })
+        })
+        setOrderData(allOrdersItem.reverse())
+      }
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(()=>{
+    loadOrderData();
+  },[token])
 
   return (
     <>
@@ -39,7 +51,7 @@ export default function Orders() {
 
         {/* List */}
         <div>
-          {orders.map((order) => (
+          {orderData.map((order) => (
             <OrderItem key={order.id} order={order} />
           ))}
         </div>

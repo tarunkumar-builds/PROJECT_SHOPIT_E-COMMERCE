@@ -1,13 +1,12 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
-import toast from "react-toastify";
 
 
 export function Login() {
-  const [currentState, setCurrentState] = useState('sign up');
-  const {token, setToken, navigate, backendUrl} = useContext(ShopContext);
+  const [currentState, setCurrentState] = useState('login');
+  const {token, setToken, navigate, backendUrl, getUserCart, setCartItems} = useContext(ShopContext);
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +20,7 @@ export function Login() {
         const response = await axios.post(backendUrl + "/api/user/register", {name, email, password});
         if(response.data.success){
           setToken(response.data.token);
-          localStorage.setItem('token', token);
+          localStorage.setItem('token', response.data.token);
 
           setName('');
           setEmail('');
@@ -31,9 +30,10 @@ export function Login() {
         }
       }else{
         const response = await axios.post(backendUrl + "/api/user/login",{email, password});
+        console.log(response.data);
         if(response.data.success){
           setToken(response.data.token);
-          localStorage.setItem('token', token);
+          localStorage.setItem('token', response.data.token);
         }else{
           toast.error(error.message);
         }
@@ -42,6 +42,13 @@ export function Login() {
       
     }
   }
+
+  useEffect(()=>{
+    if(token){
+      navigate('/')
+      getUserCart(token);
+    }
+  },[token])
   return (
     <>
 
