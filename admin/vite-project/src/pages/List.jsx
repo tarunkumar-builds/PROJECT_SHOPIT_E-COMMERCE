@@ -59,9 +59,9 @@ export default function List({token}) {
 
               {/* Body */}
               <tbody>
-                {products.map((item) => (
+                {products.map((item, index) => (
                   <tr
-                    key={item.id}
+                    key={index}
                     className="border-t hover:bg-gray-50 transition"
                   >
                     <td className="p-4">

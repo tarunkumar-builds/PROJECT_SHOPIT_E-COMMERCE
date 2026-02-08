@@ -62,14 +62,14 @@ export function Navbar() {
 
                 {/* Profile with Dropdown */}
                 <div className="relative group">
-                    <Link>
+                    {/* <Link to={token? null : '/login'}> */}
                         <img
-                            onClick={()=> navigate('/login')}
+                            onClick={()=>token? null : navigate('/login')}
                             src={assets.profile_icon}
                             className="w-5 h-5 cursor-pointer hover:scale-110 transition duration-200"
                             alt="profile"
                         />
-                    </Link>
+                    {/* </Link> */}
 
                     {/* Dropdown */}
                     {token && <div className="absolute right-0 top-6 w-36 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">

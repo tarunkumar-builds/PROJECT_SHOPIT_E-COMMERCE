@@ -1,4 +1,4 @@
-export default function OrderItem({ order }) {
+export default function OrderItem({ order , trackOrder}) {
   return (
     <div className="flex items-center justify-between gap-6 py-6 border-b">
       {/* LEFT */}
@@ -33,7 +33,7 @@ export default function OrderItem({ order }) {
           {order.status}
         </div>
 
-        <button className="border px-4 py-2 text-sm hover:bg-black hover:text-white transition">
+        <button onClick={trackOrder} className="border px-4 py-2 text-sm hover:bg-black hover:text-white transition">
           Track Order
         </button>
       </div>

@@ -13,25 +13,25 @@ export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '');
 
-  useEffect(()=>{
-    localStorage.setItem("token",token);
-  },[token])
+  useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token])
 
   return (
     <div>
       <ToastContainer />
-    {token === '' ? <Login setToken={setToken}/> :
-    <>
-      <BrowserRouter>
-        <Routes>
-          {/* <Login /> */}
-          <Route path='/add' element={<AdminLayout setToken={setToken}><Add token={token}/></AdminLayout>}/>
-          <Route path='/orders' element={<AdminLayout setToken={setToken}><Orders token={token}/></AdminLayout>}/>
-          <Route path='/list' element={<AdminLayout setToken={setToken}><List  token={token}/></AdminLayout>}/>
-        </Routes>
-      </BrowserRouter>
-    </>
-    }
+      <>
+        <BrowserRouter>
+          {token === '' ? <Login setToken={setToken} /> :
+            <Routes>
+              {/* <Login /> */}
+              < Route path='/add' element={<AdminLayout setToken={setToken}><Add token={token} /></AdminLayout>} />
+              <Route path='/orders' element={<AdminLayout setToken={setToken}><Orders token={token} /></AdminLayout>} />
+              <Route path='/list' element={<AdminLayout setToken={setToken}><List token={token} /></AdminLayout>} />
+            </Routes>
+          }
+        </BrowserRouter>
+      </>
     </div>
   )
 }

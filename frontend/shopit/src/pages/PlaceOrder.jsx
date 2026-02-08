@@ -66,6 +66,11 @@ export default function PlaceOrder() {
         paymentMethod: method,
       };
 
+      if(orderItems.length<=0){
+        toast.error("please add items to cart");
+        return;
+      }
+
       switch(method){
         case 'cod':
           const response = await axios.post(backendUrl+'/api/order/place', orderData, {headers:{token}})

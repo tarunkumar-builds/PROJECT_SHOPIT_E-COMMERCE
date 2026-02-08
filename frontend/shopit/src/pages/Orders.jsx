@@ -16,7 +16,6 @@ export default function Orders() {
       if(!token){
         return null
       }
-      console.log("token available")
       const response = await axios.post(backendUrl + '/api/order/userorders',{},{headers:{token}})
       if(response.data.success){
         let allOrdersItem = []
@@ -36,6 +35,10 @@ export default function Orders() {
     }
   }
 
+  const trackOrder = async()=>{
+    loadOrderData();
+  }
+
   useEffect(()=>{
     loadOrderData();
   },[token])
@@ -51,8 +54,8 @@ export default function Orders() {
 
         {/* List */}
         <div>
-          {orderData.map((order) => (
-            <OrderItem key={order.id} order={order} />
+          {orderData.map((order,index) => (
+            <OrderItem key={index} order={order}  trackOrder={trackOrder}/>
           ))}
         </div>
       </div>

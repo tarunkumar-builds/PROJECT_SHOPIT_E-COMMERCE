@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 export function Login() {
@@ -15,7 +16,6 @@ export function Login() {
   const onSubmitHandler = async (event) =>{
     event.preventDefault();
     try {
-      console.log("form submitted", currentState)
       if(currentState === "sign up"){
         const response = await axios.post(backendUrl + "/api/user/register", {name, email, password});
         if(response.data.success){
@@ -30,12 +30,11 @@ export function Login() {
         }
       }else{
         const response = await axios.post(backendUrl + "/api/user/login",{email, password});
-        console.log(response.data);
         if(response.data.success){
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
         }else{
-          toast.error(error.message);
+          toast.error(response.data.message);
         }
       }
     } catch (error) {
