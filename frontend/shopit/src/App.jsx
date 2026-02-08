@@ -14,7 +14,7 @@ import SearchBar from "./components/SearchBar";
 import { ShopContextProvider } from "./context/ShopContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Verify } from "./pages/verify";
+import { Verify } from "./pages/Verify";
 
 
 export default function App() {
