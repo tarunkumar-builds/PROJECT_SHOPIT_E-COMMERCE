@@ -32,7 +32,7 @@ export default function CartItem({ item, size, quantity, updateQuantity }) {
           type="number"
           min="1"
           value={quantity}
-          onChange={(e) => updateQuantity(item._id, size, e.target.value)}
+          onChange={(e) => updateQuantity(item._id, size, Number(e.target.value))}
           className="w-16 border px-2 py-1 text-center"
         />
 
