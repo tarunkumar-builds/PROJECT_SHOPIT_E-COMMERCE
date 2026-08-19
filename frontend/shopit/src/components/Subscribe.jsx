@@ -3,7 +3,7 @@ export function Subscribe() {
         <section className="text-center px-10 py-20">
             <h3 className="text-2xl font-semibold mb-3">Subscribe now & get 20% off</h3>
             <p className="text-gray-500 text-sm mb-8">
-                Lorem Ipsum is simply dummy text of the printing industry.
+                stay up-to-date with latest arrivals and offers.
             </p>
             <div className="flex max-w-xl mx-auto">
                 <input

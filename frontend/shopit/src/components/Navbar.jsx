@@ -74,12 +74,12 @@ export function Navbar() {
                     {/* Dropdown */}
                     {token && <div className="absolute right-0 top-6 w-36 bg-white shadow-lg border rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
 
-                        <NavLink
+                        {/* <NavLink
                             to="/profile"
                             className="block px-4 py-2 text-sm hover:bg-gray-100"
                         >
                             My Profile
-                        </NavLink>
+                        </NavLink> */}
 
                         <NavLink
                             to="/orders"

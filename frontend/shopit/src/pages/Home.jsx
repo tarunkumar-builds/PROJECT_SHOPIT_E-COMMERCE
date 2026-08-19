@@ -23,14 +23,14 @@ export function Home() {
 
             <SectionTitle
                 title="LATEST COLLECTIONS"
-                subtitle="Lorem Ipsum is simply dummy text of the printing industry."
+                subtitle="New arrivals to keep-up your fashoin game."
             />
             <ProductGrid products={products.slice(0, 10)} />
 
 
             <SectionTitle
                 title="BEST SELLERS"
-                subtitle="Lorem Ipsum is simply dummy text of the printing industry."
+                subtitle="Loved by most fashoin enthusiasts."
             />
             <ProductGrid products={bestsellers.slice(0, 5)} />
 

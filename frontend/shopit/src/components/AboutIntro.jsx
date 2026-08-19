@@ -16,7 +16,7 @@ const AboutIntro = () => {
       {/* Text */}
       <div className="space-y-5 text-gray-600 leading-relaxed">
         <p>
-          Forever was born out of a passion for innovation and a desire to
+          SHOPit was born out of a passion for innovation and a desire to
           revolutionize the way people shop online. Our journey began with a
           simple idea: to provide a platform where customers can easily
           discover, explore, and purchase a wide range of products from the
@@ -34,7 +34,7 @@ const AboutIntro = () => {
         <h4 className="font-semibold text-gray-900">Our Mission</h4>
 
         <p>
-          Our mission at Forever is to empower customers with choice,
+          Our mission at SHOPit is to empower customers with choice,
           convenience, and confidence. We're dedicated to providing a seamless
           shopping experience that exceeds expectations, from browsing and
           ordering to delivery and beyond.

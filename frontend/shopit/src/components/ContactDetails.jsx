@@ -9,13 +9,13 @@ const ContactDetails = () => {
         </p>
         <p>
           Tel: (415) 555-0132 <br />
-          Email: admin@forever.com
+          Email: admin@shopit.com
         </p>
       </div>
 
       <div className="space-y-3">
         <h4 className="font-semibold text-gray-900">
-          Careers at Forever
+          Careers at SHOPit
         </h4>
         <p>
           Learn more about our teams and job openings.

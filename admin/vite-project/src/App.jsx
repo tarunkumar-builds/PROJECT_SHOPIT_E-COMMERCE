@@ -25,6 +25,7 @@ function App() {
           {token === '' ? <Login setToken={setToken} /> :
             <Routes>
               {/* <Login /> */}
+              < Route path='/' element={<AdminLayout setToken={setToken}><Add token={token} /></AdminLayout>} />
               < Route path='/add' element={<AdminLayout setToken={setToken}><Add token={token} /></AdminLayout>} />
               <Route path='/orders' element={<AdminLayout setToken={setToken}><Orders token={token} /></AdminLayout>} />
               <Route path='/list' element={<AdminLayout setToken={setToken}><List token={token} /></AdminLayout>} />

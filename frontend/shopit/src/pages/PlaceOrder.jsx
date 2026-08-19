@@ -112,24 +112,24 @@ export default function PlaceOrder() {
           </h2>
 
           <div className="grid grid-cols-2 gap-4">
-            <input name="firstName" onChange={onChangeHandler} className="input" placeholder="First name" />
-            <input name="lastName" onChange={onChangeHandler} className="input" placeholder="Last name" />
+            <input name="firstName" onChange={onChangeHandler} className="input" placeholder="First name" required/>
+            <input name="lastName" onChange={onChangeHandler} className="input" placeholder="Last name" required/>
           </div>
 
-          <input name="email" onChange={onChangeHandler} className="input w-full" placeholder="Email address" />
-          <input name="street" onChange={onChangeHandler} className="input w-full" placeholder="Street" />
+          <input name="email" onChange={onChangeHandler} className="input w-full" placeholder="Email address" required/>
+          <input name="street" onChange={onChangeHandler} className="input w-full" placeholder="Street" required/>
 
           <div className="grid grid-cols-2 gap-4">
-            <input name="city" onChange={onChangeHandler} className="input" placeholder="City" />
-            <input name="state" onChange={onChangeHandler} className="input" placeholder="State" />
+            <input name="city" onChange={onChangeHandler} className="input" placeholder="City" required/>
+            <input name="state" onChange={onChangeHandler} className="input" placeholder="State" required/>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <input name="zipcode" onChange={onChangeHandler} className="input" placeholder="Zipcode" />
-            <input name="country" onChange={onChangeHandler} className="input" placeholder="Country" />
+            <input name="zipcode" onChange={onChangeHandler} className="input" placeholder="Zipcode" required/>
+            <input name="country" onChange={onChangeHandler} className="input" placeholder="Country" required/>
           </div>
 
-          <input name="phone" onChange={onChangeHandler} className="input w-full" placeholder="Phone" />
+          <input name="phone" onChange={onChangeHandler} className="input w-full" placeholder="Phone" required/>
         </div>
 
 

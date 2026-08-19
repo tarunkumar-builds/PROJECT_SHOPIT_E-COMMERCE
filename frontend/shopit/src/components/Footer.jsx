@@ -4,9 +4,9 @@ export function Footer() {
     return (
         <footer className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 py-20 border-t">
             <div>
-                <h2 className="text-xl font-semibold mb-4">FOREVER.</h2>
+                <h2 className="text-xl font-semibold mb-4">SHOPit.</h2>
                 <p className="text-sm text-gray-500">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Shopit is the only way to meet your fashoin.
                 </p>
             </div>
             <div>
@@ -21,7 +21,7 @@ export function Footer() {
             <div>
                 <h4 className="font-semibold mb-4">GET IN TOUCH</h4>
                 <p className="text-sm text-gray-500">+1-212-456-7890</p>
-                <p className="text-sm text-gray-500">contact@foreveryou.com</p>
+                <p className="text-sm text-gray-500">contact@shopit.com</p>
             </div>
         </footer>
     );

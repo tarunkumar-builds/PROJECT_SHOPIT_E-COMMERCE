@@ -14,7 +14,24 @@ connectDB();
 connectCloudinary();
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    process.env.ADMIN_FRONTEND_URL,
+    ...(process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : []),
+    process.env.NODE_ENV !== 'production' ? 'http://localhost:5173' : '',
+    process.env.NODE_ENV !== 'production' ? 'http://localhost:5174' : '',
+].filter(Boolean).map((origin) => origin.trim());
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error('Not allowed by CORS'));
+    },
+}));
 
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
