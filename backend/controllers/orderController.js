@@ -5,7 +5,13 @@ import Stripe from "stripe";
 const currency = 'inr';
 const deliveryCharge = 10;
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const getStripe = () => {
+    if (!process.env.STRIPE_SECRET_KEY) {
+        throw new Error("STRIPE_SECRET_KEY is not defined");
+    }
+
+    return new Stripe(process.env.STRIPE_SECRET_KEY);
+};
 
 const placeOrder = async (req , res) =>{
     try {
@@ -73,7 +79,7 @@ const placeOrderStripe = async (req, res)=>{
             quantity : 1
         })
 
-        const session = await stripe.checkout.sessions.create({
+        const session = await getStripe().checkout.sessions.create({
             success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
             cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
             line_items,

@@ -10,7 +10,10 @@ import orderRouter from "./routes/orderRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
-connectDB();
+
+connectDB().catch((error) => {
+    console.error("DB connection failed:", error.message);
+});
 connectCloudinary();
 
 app.use(express.json());
@@ -42,4 +45,13 @@ app.get('/',(req,res)=>{
     res.send("API WORKING");
 })
 
-app.listen(port, ()=> console.log('Server started on PORT: '+ port));
+app.use((error, req, res, next) => {
+    console.error(error);
+    res.status(500).json({success:false, message:error.message || "Internal Server Error"});
+});
+
+if (!process.env.VERCEL) {
+    app.listen(port, ()=> console.log('Server started on PORT: '+ port));
+}
+
+export default app;
